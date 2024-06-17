@@ -1,0 +1,28 @@
+version: '3'
+
+volumes:
+  pg_dating:
+
+services:
+  pg_dating:
+    image: 'postgres:latest'
+    container_name: 'pg_dating'
+    ports:
+      - "5432:5432"
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgrespw'
+      - 'POSTGRES_DB=db_dating'
+    volumes:
+      - pg_dating:/var/lib/postgresql/data
+
+  dating_app:
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+       SPRING_DATASOURSE_URL: 'jdbc:postgresql://pg_dating:5432/db_dating'
+    depends_on:
+      - pg_dating
