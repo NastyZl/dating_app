@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-auth
+      author: Nasty Zlatovchena
+      changes:
+        - createTable:
+            tableName: auth
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
