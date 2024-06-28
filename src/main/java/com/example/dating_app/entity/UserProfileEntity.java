@@ -37,6 +37,9 @@ public class UserProfileEntity {
     @Column(name = "height")
     private Integer height;
 
+    @Column(name = "description")
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "zodiac_sign", length = 20)
     private ZodiacSign zodiacSign;
