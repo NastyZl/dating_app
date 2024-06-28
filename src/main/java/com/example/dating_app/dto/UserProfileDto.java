@@ -2,11 +2,10 @@ package com.example.dating_app.dto;
 
 import com.example.dating_app.entity.UserEntity;
 import com.example.dating_app.enums.ZodiacSign;
-import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-public class UserProfilesDto {
+public class UserProfileDto {
     private Long id;
     private UserEntity userId;
     private String name;

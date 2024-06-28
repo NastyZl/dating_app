@@ -8,9 +8,9 @@ values ('ivan', '1'),
 
 --changeset zlatovchena:2
 --comment: insert users_profiles table
-insert into user_profiles (user_id, name, age, photo, city, height, zodiac_sign)
-values (1, 'Ivan', 25, '---', 'Rzn', 180, 'ARIES'),
-       (2, 'Masha', 22, '---', 'Rzn', 170, 'LEO');
+insert into user_profiles (user_id, name, age, photo, city, height,description, zodiac_sign)
+values (1, 'Ivan', 25, '---', 'Rzn', 180, 'I like coffe', 'ARIES'),
+       (2, 'Masha', 22, '---', 'Rzn', 170, 'I am a programmer', 'LEO');
 
 --changeset zlatovchena:3
 --comment: insert users_contacts table

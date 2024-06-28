@@ -20,6 +20,7 @@ CREATE TABLE user_profiles
     photo       TEXT,
     city        VARCHAR(50),
     height      INTEGER,
+    description VARCHAR(100),
     zodiac_sign VARCHAR(20),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
