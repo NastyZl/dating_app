@@ -14,8 +14,8 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping(value = "/dislike")
-    public UserProfileEntity dislikeNextCard() {
-        return cardService.dislikeNextCard();
+    public UserProfileEntity dislikeNextCard(@RequestBody UserProfileEntity userProfileEntity) {
+        return cardService.dislikeNextCard(userProfileEntity);
     }
 
 }
