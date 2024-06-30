@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface CardService {
     UserProfileEntity dislikeNextCard(UserProfileEntity userProfileEntity);
 
-
+    UserProfileEntity likeNextCard(UserProfileEntity myUserProfileEntity, UserProfileEntity likedUserProfileEntity);
 
 }

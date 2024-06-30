@@ -1,7 +1,5 @@
 package com.example.dating_app.controller;
 
-import com.example.dating_app.dto.UserProfilesDto;
-import com.example.dating_app.entity.LikesEntity;
 import com.example.dating_app.entity.UserProfileEntity;
 import com.example.dating_app.service.CardService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +14,11 @@ public class CardController {
     @GetMapping(value = "/dislike")
     public UserProfileEntity dislikeNextCard(@RequestBody UserProfileEntity userProfileEntity) {
         return cardService.dislikeNextCard(userProfileEntity);
+    }
+
+    @GetMapping(value = "/like")
+    public UserProfileEntity likeNextCard(@RequestBody UserProfileEntity myUserProfileEntity, UserProfileEntity likedUserProfileEntity) {
+        return cardService.likeNextCard(myUserProfileEntity, likedUserProfileEntity);
     }
 
 }
