@@ -10,4 +10,5 @@ public interface MatchService {
 
     List<MatchEntity> getUserMatches(long id);
     List<UserEntity> getMatchedUsersByUserId(long id);
+    List<MatchDto> getMatchedUsersAndContactsByUserId(long id);
 }

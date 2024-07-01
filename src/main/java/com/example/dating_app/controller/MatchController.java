@@ -1,5 +1,6 @@
 package com.example.dating_app.controller;
 
+import com.example.dating_app.dto.MatchDto;
 import com.example.dating_app.entity.MatchEntity;
 import com.example.dating_app.entity.UserEntity;
 import com.example.dating_app.entity.UserProfileEntity;
@@ -25,6 +26,11 @@ public class MatchController {
     @GetMapping("matched-users/{id}")
     public List<UserEntity> getMatchedUsers(@PathVariable Long id) {
         return matchService.getMatchedUsersByUserId(id);
+    }
+
+    @GetMapping("matched-users-and-contacts/{id}")
+    public List<MatchDto> getMatchedUsersAndContacts(@PathVariable Long id) {
+        return matchService.getMatchedUsersAndContactsByUserId(id);
     }
 
 }
