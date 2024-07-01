@@ -17,3 +17,6 @@ values (1, 'Ivan', 25, '---', 'Rzn', 180, 'ARIES'),
 insert into user_contacts (user_id, telegram, phone_number)
 values (1, '@ivan', '89105038707'),
        (2, '@masha', '89206352885');
+
+insert into likes (id, liked_user_id, user_id)
+values (1, 1, 2);
