@@ -3,20 +3,19 @@ package com.example.dating_app.controller;
 import com.example.dating_app.dto.AuthenticationRequest;
 import com.example.dating_app.dto.AuthenticationResponse;
 import com.example.dating_app.dto.RegisterRequest;
-import com.example.dating_app.dto.UserDto;
-import com.example.dating_app.exception.UserNotFoundException;
 import com.example.dating_app.service.AuthenticationService;
-import com.example.dating_app.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/v1.0/dating/auth")
 public class AuthController {
 
-    private final UserService userService;
     private final AuthenticationService service;
 
     @PostMapping("/register")
@@ -25,6 +24,7 @@ public class AuthController {
     ) {
         return ResponseEntity.ok(service.register(request));
     }
+
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
