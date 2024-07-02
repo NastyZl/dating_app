@@ -14,7 +14,10 @@ public interface UserProfileRepository extends JpaRepository<UserProfileEntity, 
     @Query("select u from UserProfileEntity u where u.userId.id=:id")
     Optional<UserProfileEntity> findUserProfileByUserId(@Param("id") Long id);
 
-    @Query(value = "SELECT MAX(user_id) FROM user_profiles", nativeQuery = true)
+    @Query(value = "SELECT MAX(id) FROM user_profiles", nativeQuery = true)
     Long getMaxUserId();
+
+    @Query(value = "SELECT user_profiles.id FROM user_profiles JOIN users ON user_profiles.user_id = users.id WHERE users.login = ?1", nativeQuery = true)
+    Long findUserProfileIdByLogin(String login);
 
 }
