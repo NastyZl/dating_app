@@ -1,29 +1,35 @@
 package com.example.dating_app.controller;
 
-import com.example.dating_app.dto.UserDto;
-import com.example.dating_app.exception.UserNotFoundException;
-import com.example.dating_app.service.UserService;
+import com.example.dating_app.dto.AuthenticationRequest;
+import com.example.dating_app.dto.AuthenticationResponse;
+import com.example.dating_app.dto.RegisterRequest;
+import com.example.dating_app.service.AuthenticationService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/v1.0/dating")
+@RequestMapping("/v1.0/dating/auth")
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthenticationService service;
 
-    @GetMapping(value = "/{userId}")
-    public String findById(@PathVariable Long userId) throws UserNotFoundException {
-        UserDto userDto = userService.findById(userId);
-        return userDto.getLogin();
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
+        return ResponseEntity.ok(service.register(request));
     }
 
-    @GetMapping(value = "/test")
-    public String findById() {
-        return "top";
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+            @RequestBody AuthenticationRequest request
+    ) {
+        return ResponseEntity.ok(service.authenticate(request));
     }
+
 }
