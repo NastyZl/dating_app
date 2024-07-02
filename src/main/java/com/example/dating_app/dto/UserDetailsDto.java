@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDetailsDto {
-    private Long id;
     private String login;
     private String telegram;
     private String phoneNumber;

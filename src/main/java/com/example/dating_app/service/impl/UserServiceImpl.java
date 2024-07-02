@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService {
     private UserDetailsDto mapper(String login, UserProfileEntity profile) {
         return Stream.of(profile)
                 .map(p -> new UserDetailsDto(
-                        p.getId(),
                         login,
                         "",
                         "",
