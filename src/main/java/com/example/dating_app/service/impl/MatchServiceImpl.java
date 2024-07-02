@@ -44,7 +44,7 @@ public class MatchServiceImpl implements MatchService {
             }
             else {
                 matchedUsers.add(matchMapper.mapUserContactsEntityToMatchDto(
-                                userContactRepository.findContactByUserId(match.getSecondUser().getId())));
+                                userContactRepository.findContactByUserId(match.getFirstUser().getId())));
 
             }
         }

@@ -9,6 +9,7 @@ import com.example.dating_app.repository.UserContactRepository;
 import com.example.dating_app.repository.UserProfileRepository;
 import com.example.dating_app.repository.UserRepository;
 import com.example.dating_app.service.UserProfileService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final UserContactMapper userContactMapper;
 
     @Override
+    @Transactional
     public void createUserProfile(UserDetailsDto userDetailsDto, String login) {
 
         var userAccount = userRepository.findByLogin(login);
