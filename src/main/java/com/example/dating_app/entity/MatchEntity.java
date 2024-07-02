@@ -18,10 +18,10 @@ public class MatchEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "first_user_id", nullable = false)
-    private UserEntity firstUserId;
+    @JoinColumn(name = "first_user", nullable = false)
+    private UserEntity firstUser;
 
     @ManyToOne
-    @JoinColumn(name = "second_user_id", nullable = false)
-    private UserEntity secondUserId;
+    @JoinColumn(name = "second_user", nullable = false)
+    private UserEntity secondUser;
 }

@@ -1,6 +1,6 @@
 package com.example.dating_app.service.impl;
 
-import com.example.dating_app.dto.UserProfilesDto;
+import com.example.dating_app.dto.UserProfileDto;
 import com.example.dating_app.entity.LikesEntity;
 import com.example.dating_app.entity.MatchEntity;
 import com.example.dating_app.entity.UserProfileEntity;
@@ -27,18 +27,18 @@ public class CardServiceImpl implements CardService {
     private final UserRepository userRepository;
 
     @Override
-    public UserProfilesDto dislikeNextCard(Principal principal) {
+    public UserProfileDto dislikeNextCard(Principal principal) {
         Long userId = userProfileRepository.findUserProfileIdByLogin(principal.getName());
         UserProfileEntity userProfileEntity = userProfileRepository.findById(userId).get();
         Long id = findCorrectUserId(userProfileEntity);
         Optional<UserProfileEntity> userProfile = userProfileRepository.findById(id);
-        UserProfilesDto userProfilesDto = userProfileMapper.userEntityToUserDto(userProfile.get());
-        userProfilesDto.setUserId(null);
+        UserProfileDto userProfilesDto = userProfileMapper.mapUserProfileEntityToUserProfileDto(userProfile.get());
+        //userProfilesDto.setUserId(null);
         return userProfilesDto;
     }
 
     @Override
-    public UserProfilesDto likeNextCard(UserProfileEntity likedUserProfileEntity, Principal principal) {
+    public UserProfileDto likeNextCard(UserProfileEntity likedUserProfileEntity, Principal principal) {
 
         if (likesRepository.checkIfUserIdExistsInLikedUserIdWithUser(userRepository.findByLogin(principal.getName()).get().getId(), likedUserProfileEntity.getUserId().getId())) {
             likesRepository.deleteLike(userRepository.findById(likedUserProfileEntity.getUserId().getId()).get().getId(), userRepository.findByLogin(principal.getName()).get().getId());
@@ -56,8 +56,8 @@ public class CardServiceImpl implements CardService {
 
         Long id = findCorrectUserId(userProfileEntity);
         Optional<UserProfileEntity> userProfile = userProfileRepository.findById(id);
-        UserProfilesDto userProfilesDto = userProfileMapper.userEntityToUserDto(userProfile.get());
-        userProfilesDto.setUserId(null);
+        UserProfileDto userProfilesDto = userProfileMapper.mapUserProfileEntityToUserProfileDto(userProfile.get());
+        //userProfilesDto.setUserId(null);
 
         return userProfilesDto;
     }
@@ -78,8 +78,8 @@ public class CardServiceImpl implements CardService {
     public void createMatch(UserProfileEntity userProfileEntity, String login) {
         Long id = userProfileEntity.getUserId().getId();
         MatchEntity match = new MatchEntity();
-        match.setFirstUserId(userRepository.findByLogin(login).get());
-        match.setSecondUserId(userRepository.findById(id).get());
+        match.setFirstUser(userRepository.findByLogin(login).get());
+        match.setSecondUser(userRepository.findById(id).get());
         matchRepository.save(match);
     }
 

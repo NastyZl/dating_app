@@ -1,6 +1,7 @@
 package com.example.dating_app.controller;
 
 import com.example.dating_app.dto.UserDetailsDto;
+import com.example.dating_app.dto.UserProfileDto;
 import com.example.dating_app.entity.UserProfileEntity;
 import com.example.dating_app.service.UserProfileService;
 import com.example.dating_app.service.UserService;
@@ -18,13 +19,14 @@ public class UserProfileController {
     private final UserService userService;
 
     @PostMapping("create")
-    public UserProfileEntity createUserProfile(@RequestBody UserProfileEntity userProfileEntity) {
-        return userProfileService.createUserProfile(userProfileEntity);
+    public ResponseEntity createUserProfile(@RequestBody UserDetailsDto userDetailsDto, Principal principal) {
+        userProfileService.createUserProfile(userDetailsDto, principal.getName());
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{id}")
-    public UserProfileEntity updateUserProfile(@PathVariable Long id) {
-        return userProfileService.getUserProfileById(id);
+    @GetMapping()
+    public UserProfileDto getUserProfile(Principal principal) {
+        return userProfileService.getUserProfileByLogin(principal.getName());
     }
 
     @GetMapping("my-profile")

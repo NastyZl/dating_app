@@ -1,10 +1,12 @@
 package com.example.dating_app.service;
 
 
-import com.example.dating_app.dto.UserProfilesDto;
+import com.example.dating_app.dto.UserDetailsDto;
+import com.example.dating_app.dto.UserProfileDto;
+import com.example.dating_app.dto.UserProfileDto;
 import com.example.dating_app.entity.UserProfileEntity;
 
 public interface UserProfileService {
-    UserProfileEntity createUserProfile(UserProfileEntity userProfilesDto);
-    UserProfileEntity getUserProfileById(Long user_id);
+    void createUserProfile(UserDetailsDto userDetailsDto, String login);
+    UserProfileDto getUserProfileByLogin(String login);
 }
