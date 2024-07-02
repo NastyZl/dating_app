@@ -39,13 +39,16 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public UserProfilesDto likeNextCard(UserProfileEntity likedUserProfileEntity, Principal principal) {
-        if (likesRepository.checkIfUserIdExistsInLikedUserIdWithUser(userRepository.findById(likedUserProfileEntity.getId()).get().getId(), userRepository.findByLogin(principal.getName()).get().getId())) {
-            likesRepository.deleteLike(userRepository.findById(likedUserProfileEntity.getId()).get().getId(), userRepository.findByLogin(principal.getName()).get().getId());
+
+        if (likesRepository.checkIfUserIdExistsInLikedUserIdWithUser(userRepository.findByLogin(principal.getName()).get().getId(), likedUserProfileEntity.getUserId().getId())) {
+            likesRepository.deleteLike(userRepository.findById(likedUserProfileEntity.getUserId().getId()).get().getId(), userRepository.findByLogin(principal.getName()).get().getId());
+            likesRepository.deleteLike(userRepository.findByLogin(principal.getName()).get().getId(), userRepository.findById(likedUserProfileEntity.getUserId().getId()).get().getId());
             createMatch(likedUserProfileEntity, principal.getName());
         }
         else {
             createLike(likedUserProfileEntity, principal.getName());
         }
+
 
 
         Long userId = userProfileRepository.findUserProfileIdByLogin(principal.getName());
@@ -61,17 +64,19 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void createLike(UserProfileEntity userProfileEntity, String login) {
-        Long id = userProfileEntity.getId();
+        Long id = userProfileEntity.getUserId().getId();
         LikesEntity like = new LikesEntity();
         like.setUserId(userRepository.findByLogin(login).get());
         like.setLikedUserId(userRepository.findById(id).get());
+
+
         likesRepository.save(like);
     }
 
 
     @Override
     public void createMatch(UserProfileEntity userProfileEntity, String login) {
-        Long id = userProfileEntity.getId();
+        Long id = userProfileEntity.getUserId().getId();
         MatchEntity match = new MatchEntity();
         match.setFirstUserId(userRepository.findByLogin(login).get());
         match.setSecondUserId(userRepository.findById(id).get());
